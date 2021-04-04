@@ -14,7 +14,7 @@ export default gql`
     seeProfile(username: String!): User
   }
   type Mutation {
-    createdAccount(
+    createAccount(
       firstName: String!
       lastName: String!
       userName: String!
