@@ -6,7 +6,7 @@ export default {
   Mutation: {
     editProfile: async (
       _,
-      { firstName, lastName, username, email, password, token }
+      { firstName, lastName, username, email, password }
     ) => {
       const { id } = await jwt.verify(token, process.env.SECRET_KEY);
       let uglyPassword = null;
