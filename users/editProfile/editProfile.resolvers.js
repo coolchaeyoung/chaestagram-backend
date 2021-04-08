@@ -4,10 +4,10 @@ import { protectedResolver } from "../users.utils";
 
 const resolverFn = async (
   _,
-  { firstName, lastName, username, email, password, bio },
-  { loggedInUser, protectResolver }
+  { firstName, lastName, username, email, password, bio, avatar },
+  { loggedInUser }
 ) => {
-  protectResolver(loggedInUser);
+  console.log(avatar);
   let uglyPassword = null;
   if (password) {
     uglyPassword = await bcrypt.hash(password, 10);
