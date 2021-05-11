@@ -17,7 +17,7 @@ const server = new ApolloServer({
 });
 
 const app = express();
-app.use(morgan("tiny");
+app.use(morgan("tiny"));
 server.applyMiddleware({ app });
 app.listen({ port: 4000 }, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
