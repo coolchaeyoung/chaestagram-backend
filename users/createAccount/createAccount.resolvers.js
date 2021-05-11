@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import client from "../../client";
 export default {
   Mutation: {
@@ -14,7 +15,7 @@ export default {
           throw new Error("This username/email is already taken.");
         }
         const uglyPassword = await bcrypt.hash(password, 10);
-        await client.user.create({
+        const user = await client.user.create({
           data: {
             firstName,
             lastName,
@@ -23,13 +24,15 @@ export default {
             password: uglyPassword,
           },
         });
+        const token = await jwt.sign({ id: user.id }, process.env.SECRET_KEY);
         return {
           ok: true,
+          token,
         };
       } catch (e) {
         return {
           ok: false,
-          error: "Can't create account.",
+          error: e,
         };
       }
     },
